@@ -16,8 +16,8 @@
 					<tbody>
 						<tr v-for="actP of arrPlanet">
 							<td class="center">{{actP.name}}</td>
-							<td class="center">{{actP.weight}}</td>
-							<td class="center">{{actP.diameter}}</td>
+							<td class="center">{{actP.weight}}kg</td>
+							<td class="center">{{actP.diameter}}km</td>
 							<td class="center">{{actP.numSatelites}}</td>
 							<td class="center"><router-link :to="'/planet-profile-'+actP._id">View Planet</router-link></td>
 						</tr>

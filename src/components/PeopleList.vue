@@ -16,8 +16,8 @@
 				<tbody>
 					<tr v-for="actP of arrPeople">
 						<td>{{actP.name}}</td>
-						<td>{{actP.age}}</td>
-						<td>{{actP.height}}</td>
+						<td>{{actP.age}}years old</td>
+						<td>{{actP.height}}cm</td>
 						<td>{{actP.eyeColor}}</td>
 						<td><router-link :to="'/people-profile-'+actP._id">View Profile</router-link></td>
 					</tr>

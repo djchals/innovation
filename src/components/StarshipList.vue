@@ -16,7 +16,7 @@
 					<tbody>
 						<tr v-for="actS of arrStarship">
 							<td class="center">{{actS.name}}</td>
-							<td class="center">{{actS.weight}}</td>
+							<td class="center">{{actS.weight}}kg</td>
 							<td class="center">{{actS.manufacturer}}</td>
 							<td class="center">{{actS.yearConstruction}}</td>
 							<td class="center"><router-link :to="'/starship-profile-'+actS._id">View Starship</router-link></td>

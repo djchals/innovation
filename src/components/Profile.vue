@@ -10,18 +10,18 @@
 								<li><b>ID</b>: {{this.$route.params.profileId}}</li>
 								<li><b>Name</b>: {{profile.name}}</li>
 								<template v-if="this.$route.params.profileType=='people'">
-									<li><b>Age</b>: {{profile.age}}</li>
-									<li><b>Height</b>: {{profile.height}}</li>
+									<li><b>Age</b>: {{profile.age}}years old</li>
+									<li><b>Height</b>: {{profile.height}}cm</li>
 									<li><b>Eye Color</b>: {{profile.eyeColor}}</li>
 								</template>
 								<template v-else-if="this.$route.params.profileType=='starship'">
-									<li><b>Weight</b>: {{profile.weight}}</li>
+									<li><b>Weight</b>: {{profile.weight}}kg</li>
 									<li><b>Manufacturer</b>: {{profile.manufacturer}}</li>
 									<li><b>Year Construction</b>: {{profile.yearConstruction}}</li>
 								</template>
 								<template v-else-if="this.$route.params.profileType=='planet'">
-									<li><b>Weight</b>: {{profile.weight}}</li>
-									<li><b>Diameter</b>: {{profile.diameter}}</li>
+									<li><b>Weight</b>: {{profile.weight}}kg</li>
+									<li><b>Diameter</b>: {{profile.diameter}}km</li>
 									<li><b>Num. Satelites</b>: {{profile.numSatelites}}</li>
 								</template>	
 							</ul>

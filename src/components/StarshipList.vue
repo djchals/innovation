@@ -1,28 +1,32 @@
 <template>
 	<div>
-		<div id="container-data">
-			<h1>Starship list</h1>
-			<table>
-				<thead>
-					<tr>
-						<th><router-link v-bind:to="'/starship-list-name-'+arrAntiSort[sort]">Name {{((order=='name')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/starship-list-weight-'+arrAntiSort[sort]">Weight {{((order=='weight')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/starship-list-manufacturer-'+arrAntiSort[sort]">Manufacturer {{((order=='manufacturer')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/starship-list-yearConstruction-'+arrAntiSort[sort]">Year of construction {{((order=='yearConstruction')?arrArrow[sort]:'')}}</router-link></th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="actS of arrStarship">
-						<td>{{actS.name}}</td>
-						<td>{{actS.weight}}</td>
-						<td>{{actS.manufacturer}}</td>
-						<td>{{actS.yearConstruction}}</td>
-						<td><router-link :to="'/starship-profile-'+actS._id">View Starship</router-link></td>
-					</tr>
-				</tbody>
-			</table>
-			<router-link to="/">Go back</router-link>
+		<div id="container-data" class="col s6">
+			<div class="collection">
+				<h4 class="center">Starship list</h4>
+				<table class="mb-5">
+					<thead>
+						<tr>
+							<th class="center"><router-link v-bind:to="'/starship-list-name-'+arrAntiSort[sort]">Name <i v-if="order=='name'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/starship-list-weight-'+arrAntiSort[sort]">Weight <i v-if="order=='weight'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/starship-list-manufacturer-'+arrAntiSort[sort]">Manufacturer <i v-if="order=='manufacturer'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/starship-list-yearConstruction-'+arrAntiSort[sort]">Year of construction <i v-if="order=='yearConstruction'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="actS of arrStarship">
+							<td class="center">{{actS.name}}</td>
+							<td class="center">{{actS.weight}}</td>
+							<td class="center">{{actS.manufacturer}}</td>
+							<td class="center">{{actS.yearConstruction}}</td>
+							<td class="center"><router-link :to="'/starship-profile-'+actS._id">View Starship</router-link></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-5">
+				<router-link to="/"><i class="material-icons">arrow_back</i></router-link>
+			</p>
 		</div>
 		<Loading/>
 	</div>
@@ -40,8 +44,8 @@ export default {
 		lastOrder: '',
 		lastSort: '',
 		arrArrow: {
-			asc: '(up)',
-			dsc: '(down)'
+			asc: 'arrow_drop_up',
+			dsc: 'arrow_drop_down'
 		},
 		arrAntiSort: {
 			dsc: 'asc',

@@ -1,14 +1,15 @@
 <template>
 	<div>
-		<div id="container-data">
-			<h1>People list</h1>
-			<table>
+		<div id="container-data" class="col s6">
+			<div class="collection">
+				<h4 class="center">People list</h4>
+				<table class="mb-5">
 				<thead>
 					<tr>
-						<th><router-link v-bind:to="'/people-list-name-'+arrAntiSort[sort]">Name {{((order=='name')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/people-list-age-'+arrAntiSort[sort]">Age {{((order=='age')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/people-list-height-'+arrAntiSort[sort]">Height {{((order=='height')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/people-list-eyeColor-'+arrAntiSort[sort]">Eye color {{((order=='eyeColor')?arrArrow[sort]:'')}}</router-link></th>
+						<th><router-link v-bind:to="'/people-list-name-'+arrAntiSort[sort]">Name <i v-if="order=='name'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+						<th><router-link v-bind:to="'/people-list-age-'+arrAntiSort[sort]">Age <i v-if="order=='age'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+						<th><router-link v-bind:to="'/people-list-height-'+arrAntiSort[sort]">Height <i v-if="order=='height'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+						<th><router-link v-bind:to="'/people-list-eyeColor-'+arrAntiSort[sort]">Eye color <i v-if="order=='eyeColor'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -20,9 +21,12 @@
 						<td>{{actP.eyeColor}}</td>
 						<td><router-link :to="'/people-profile-'+actP._id">View Profile</router-link></td>
 					</tr>
-				</tbody>
-			</table>
-			<router-link to="/">Go back</router-link>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-5">
+				<router-link to="/"><i class="material-icons">arrow_back</i></router-link>
+			</p>
 		</div>
 		<Loading/>
 	</div>
@@ -41,8 +45,8 @@ export default {
 		lastOrder: '',
 		lastSort: '',
 		arrArrow: {
-			asc: '(up)',
-			dsc: '(down)'
+			asc: 'arrow_drop_up',
+			dsc: 'arrow_drop_down'
 		},
 		arrAntiSort: {
 			dsc: 'asc',

@@ -1,28 +1,32 @@
 <template>
 	<div>
-		<div id="container-data">
-			<h1>Planet list</h1>
-			<table>
-				<thead>
-					<tr>
-						<th><router-link v-bind:to="'/planet-list-name-'+arrAntiSort[sort]">Name {{((order=='name')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/planet-list-weight-'+arrAntiSort[sort]">Weight {{((order=='weight')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/planet-list-diameter-'+arrAntiSort[sort]">Diameter {{((order=='diameter')?arrArrow[sort]:'')}}</router-link></th>
-						<th><router-link v-bind:to="'/planet-list-numSatelites-'+arrAntiSort[sort]">numSatelites {{((order=='numSatelites')?arrArrow[sort]:'')}}</router-link></th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="actP of arrPlanet">
-						<td>{{actP.name}}</td>
-						<td>{{actP.weight}}</td>
-						<td>{{actP.diameter}}</td>
-						<td>{{actP.numSatelites}}</td>
-						<td><router-link :to="'/planet-profile-'+actP._id">View Planet</router-link></td>
-					</tr>
-				</tbody>
-			</table>
-			<router-link to="/">Go back</router-link>
+		<div id="container-data" class="col s6">
+			<div class="collection">
+				<h4 class="center">Planet list</h4>
+				<table class="mb-5">
+					<thead>
+						<tr>
+							<th class="center"><router-link v-bind:to="'/planet-list-name-'+arrAntiSort[sort]">Name <i v-if="order=='name'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/planet-list-weight-'+arrAntiSort[sort]">Weight <i v-if="order=='weight'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/planet-list-diameter-'+arrAntiSort[sort]">Diameter <i v-if="order=='diameter'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center"><router-link v-bind:to="'/planet-list-numSatelites-'+arrAntiSort[sort]">numSatelites <i v-if="order=='numSatelites'" class="material-icons">{{arrArrow[sort]}}</i></router-link></th>
+							<th class="center">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="actP of arrPlanet">
+							<td class="center">{{actP.name}}</td>
+							<td class="center">{{actP.weight}}</td>
+							<td class="center">{{actP.diameter}}</td>
+							<td class="center">{{actP.numSatelites}}</td>
+							<td class="center"><router-link :to="'/planet-profile-'+actP._id">View Planet</router-link></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-5">
+				<router-link to="/"><i class="material-icons">arrow_back</i></router-link>
+			</p>
 		</div>
 		<Loading/>
 	</div>
@@ -40,8 +44,8 @@ export default {
 		lastOrder: '',
 		lastSort: '',
 		arrArrow: {
-			asc: '(up)',
-			dsc: '(down)'
+			asc: 'arrow_drop_up',
+			dsc: 'arrow_drop_down'
 		},
 		arrAntiSort: {
 			dsc: 'asc',

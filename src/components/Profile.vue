@@ -1,27 +1,37 @@
 <template>
 	<div>
 		<div id="container-data">
-			<h1>{{arrTagProfileType[this.$route.params.profileType]}} data:</h1>
-				<ul>
-					<li>ID: {{this.$route.params.profileId}}</li>
-					<li>Name: {{profile.name}}</li>
-					<template v-if="this.$route.params.profileType=='people'">
-						<li>Age: {{profile.age}}</li>
-						<li>Height: {{profile.height}}</li>
-						<li>Eye Color: {{profile.eyeColor}}</li>
-					</template>
-					<template v-else-if="this.$route.params.profileType=='starship'">
-						<li>Weight: {{profile.weight}}</li>
-						<li>Manufacturer: {{profile.manufacturer}}</li>
-						<li>Year Construction: {{profile.yearConstruction}}</li>
-					</template>
-					<template v-else-if="this.$route.params.profileType=='planet'">
-						<li>Weight: {{profile.weight}}</li>
-						<li>Diameter: {{profile.diameter}}</li>
-						<li>Num. Satelites: {{profile.numSatelites}}</li>
-					</template>	
-				</ul>
-			<router-link :to="'/'+this.$route.params.profileType+'-list'">Go back</router-link>
+			<div class="row">
+				<div class="col s12 m6">
+					<div class="card">
+						<div class="card-content">
+							<h4 class="center">{{arrTagProfileType[this.$route.params.profileType]}} data</h4>
+							<ul>
+								<li><b>ID</b>: {{this.$route.params.profileId}}</li>
+								<li><b>Name</b>: {{profile.name}}</li>
+								<template v-if="this.$route.params.profileType=='people'">
+									<li><b>Age</b>: {{profile.age}}</li>
+									<li><b>Height</b>: {{profile.height}}</li>
+									<li><b>Eye Color</b>: {{profile.eyeColor}}</li>
+								</template>
+								<template v-else-if="this.$route.params.profileType=='starship'">
+									<li><b>Weight</b>: {{profile.weight}}</li>
+									<li><b>Manufacturer</b>: {{profile.manufacturer}}</li>
+									<li><b>Year Construction</b>: {{profile.yearConstruction}}</li>
+								</template>
+								<template v-else-if="this.$route.params.profileType=='planet'">
+									<li><b>Weight</b>: {{profile.weight}}</li>
+									<li><b>Diameter</b>: {{profile.diameter}}</li>
+									<li><b>Num. Satelites</b>: {{profile.numSatelites}}</li>
+								</template>	
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class="mt-5">
+				<router-link :to="'/'+this.$route.params.profileType+'-list'"><i class="material-icons">arrow_back</i></router-link>
+			</p>
 		</div>
 		<Loading/>
 	</div>

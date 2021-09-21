@@ -1,10 +1,12 @@
 <template>
 	<div>
-		<div id="container-data">
-			<h1>Home</h1>
-			<h2><router-link to="/people-list">People</router-link></h2>
-			<h2><router-link to="/starship-list-name-asc">Starships</router-link></h2>
-			<h2><router-link to="/planet-list">Planets</router-link></h2>
+		<div id="container-data" class="col s6">
+			<ul class="collection col s6">
+				<li class="collection-header"><h4>Home Options</h4></li>
+				<li class="collection-item"><router-link to="/people-list">People</router-link></li>
+				<li class="collection-item"><router-link to="/starship-list-name-asc">Starships</router-link></v>
+				<li class="collection-item"><router-link to="/planet-list">Planets</router-link></li>
+			</ul>
 		</div>
 		<Loading/>
 	</div>

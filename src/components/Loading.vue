@@ -1,6 +1,9 @@
 <template>
 	<div id="loading-data">
-		<h2>Cargando...</h2>
+		<div class="col s12 m6 center">
+			<h4>Cargando...</h4>
+			<img src="img/loading.gif"/>
+		</div>
 	</div>
 </template>
 <style>

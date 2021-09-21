@@ -19,15 +19,10 @@ app.use(express.urlencoded({extended: false}));//mediante urlencoded podemos rec
 //routes
 app.use('/',require('./src/routes/expressRoutes.js'));//le decimos a express que use el directorio raiz como base
 
-// app.use(function(req, res){
-//     return res.status(404).render(path.join(__dirname,'./src/views/404.ejs'), {
-// 		data: {
-// 			metaTitle: '404 Page not found',
-// 			metaDescription: "The page you are trying to access does not exist.",
-// 			urlPage: req.url
-// 		}
-// 	});
-// });
+app.use(function(req, res){
+	console.log(path.join(__dirname,'./src/public/404.html'));
+	res.status(404).sendFile(path.join(__dirname,'./src/public/404.html'));
+});
 
 //starting the server
 app.listen(app.get('port'),()=>{

@@ -7,7 +7,10 @@ require('dotenv').config();//requerimos la configuración para poder tratar con 
 
 //initializations
 const app=express();
-require('./src/models/database.js');
+
+//DB connect 
+require('./src/app/DBConnect.js');
+
 //settings
 app.set('port',process.env.PORT || 3000);
 
@@ -17,8 +20,9 @@ app.use(bodyParser.json());//inicializamos aquí el body-parser para los formula
 app.use(express.urlencoded({extended: false}));//mediante urlencoded podemos recibir los datos recibidos del cliente antes de procesarlos en las rutas. Por ejemplo: variables POST
 
 //routes
-app.use('/',require('./src/routes/expressRoutes.js'));//le decimos a express que use el directorio raiz como base
+app.use('/',require('./src/routes/expressRoutes.js'));//estas serán las rutas que empleará express
 
+//404
 app.use(function(req, res){
 	console.log(path.join(__dirname,'./src/public/404.html'));
 	res.status(404).sendFile(path.join(__dirname,'./src/public/404.html'));

@@ -2,17 +2,18 @@ const express=require('express');
 const router=express.Router();
 const path=require('path');
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;//necesario como antihack por si a alguien le da por meter algo raro
+const ObjectId = mongoose.Types.ObjectId;//necesario como antihack por si a alguien le da por meter algo raro en vez de la Id
 
 //configuramos aquí los middlewares
 router.use(express.static(path.join(__dirname,'../public')));//
-const routeIndex=path.join(__dirname,'../public/index.html');//este será el archivo en el que rendirizaremos los componentes
+const routeIndex=path.join(__dirname,'../public/index.html');//este será el archivo en el que renderizaremos los componentes
 
 const People=require('../models/peoples.js');
 const Starship=require('../models/starships.js');
 const Planet=require('../models/planets.js');
 
-require('dotenv').config();//requerimos la configuración para poder tratar con el archivo .env, necesitaremos consultar MAXWORDS y MAXCOURSES
+require('dotenv').config();//requerimos la configuración para poder tratar con el archivo .env
+
 /////////////////////////////////////////////////////// HOME ///////////////////////////////////////////////////////////////////
 router.get('/',(req,res,next)=>{
 	res.sendFile(routeIndex);

@@ -24,19 +24,17 @@
 					</tbody>
 				</table>
 			</div>
-			<p class="mt-5">
-				<router-link to="/"><i class="material-icons">arrow_back</i></router-link>
-			</p>
+			<GoBack/>
 		</div>
 		<Loading/>
 	</div>
 </template>
 <script>
-	
 import CommonFns from './js/CommonFns.js';
 import Loading from './Loading.vue';
+import GoBack from './GoBack.vue';
 export default {
-	components: {Loading},
+	components: {GoBack,Loading},
 	data:()=>({
 		commonFns: new CommonFns(),
 		arrPeople: [],

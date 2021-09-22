@@ -29,18 +29,17 @@
 					</div>
 				</div>
 			</div>
-			<p class="mt-5">
-				<router-link :to="'/'+this.$route.params.profileType+'-list'"><i class="material-icons">arrow_back</i></router-link>
-			</p>
+			<GoBack profileType="'/'+this.$route.params.profileType+'-list'"/>
 		</div>
 		<Loading/>
 	</div>
 </template>
 <script>
 import CommonFns from './js/CommonFns.js';
+import GoBack from './GoBack.vue';
 import Loading from './Loading.vue';
 export default {
-	components: {Loading},
+	components: {GoBack,Loading},
 	data:()=>({
 		commonFns: new CommonFns(),
 		profile: {},

@@ -7,7 +7,7 @@ class createCacheFiles {
 		this.urlOriginBase = params.urlOriginBase
 		this.paths = params.paths
 		this.outputFolder = params.outputFolder
-		this.DB = []
+		this.cacheDB = []
 	}
 	renderAllPaths(){
 		//check if exists all the params
@@ -23,6 +23,8 @@ class createCacheFiles {
 			})();
 			cacheDB[iPath] = this.paths[iPath]
 		}
+
+		this.saveCacheDB(cacheDB)
 	}
 	async getContentURL(actPath) {
 		const url = path.join(this.urlOriginBase, actPath)
@@ -34,7 +36,6 @@ class createCacheFiles {
 
 	writeCacheFile(cacheFileName, cacheContent) {
 		const actFile = path.join(this.outputFolder,cacheFileName) 
-		console.log(actFile)
 
 		fs.writeFile (actFile, cacheContent, function (err) {
 			if (err) {
@@ -42,6 +43,19 @@ class createCacheFiles {
 			}
 			console.log (actFile + ' saved')
 		});
+	}
+	saveCacheDB(newCacheDB) {
+		this.cacheDB = newCacheDB
+
+		let contentFileCacheDB = JSON.stringify(this.cacheDB)
+		let routeFileCacheDB = path.join(this.outputFolder,'cacheDB.json')
+
+		fs.writeFile(routeFileCacheDB, contentFileCacheDB, function(err){
+			if (err) {
+				return console.log(err)
+			}
+			console.log ('cacheDB.json saved')
+		})
 	}
 }
 

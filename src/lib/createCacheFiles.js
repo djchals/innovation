@@ -19,7 +19,6 @@ class createCacheFiles {
 			(async () => {
 				let cacheContent = await this.getContentURL (this.paths[iPath])
 				this.writeCacheFile (iPath.toString(), cacheContent)
-				// console.log('dentro')
 			})();
 			cacheDB[iPath] = this.paths[iPath]
 		}
@@ -46,21 +45,21 @@ class createCacheFiles {
 	}
 	saveCacheDB(newCacheDB) {
 		this.cacheDB = newCacheDB
-
+		let cacheDBFileName = 'cacheDB.json'
 		let contentFileCacheDB = JSON.stringify(this.cacheDB)
-		let routeFileCacheDB = path.join(this.outputFolder,'cacheDB.json')
+		let routeFileCacheDB = path.join(this.outputFolder,cacheDBFileName)
 
 		fs.writeFile(routeFileCacheDB, contentFileCacheDB, function(err){
 			if (err) {
 				return console.log(err)
 			}
-			console.log ('cacheDB.json saved')
+			console.log (cacheDBFileName+' saved')
 		})
 	}
 }
 
 const simple = new createCacheFiles({
-	urlOriginBase: 'https://autoexaming.com',
+	urlOriginBase: 'http://localhost:3000',
 	paths: ['/'],
 	outputFolder: 'cache'
 })

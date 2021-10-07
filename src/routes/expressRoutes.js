@@ -4,14 +4,6 @@ const path=require('path');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;//necesario como antihack por si a alguien le da por meter algo raro en vez de la Id
 
-const userAgent = require('../lib/userAgent.js')
-
-if(userAgent.isBot()){
-	console.log("es un bot")
-}else{
-	console.log("NO NO NO")
-}
-
 //configuramos aquí los middlewares
 router.use(express.static(path.join(__dirname,'../public')));//
 const routeIndex=path.join(__dirname,'../public/index.html');//este será el archivo en el que renderizaremos los componentes

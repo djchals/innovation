@@ -28,6 +28,7 @@ const router = new Router({
 		
 		{path: "/:profileType(planet|starship|people)-profile-:profileId([0-9]*)", component: Profile},
 		{path: "/:profileType(planet|starship|people)-profile-edit-:profileId([0-9]*)", component: ProfileEdit},
+	        {path: "/:profileType(planet|starship|people)-profile-add", component: ProfileEdit},
 	]
 });
 export default router

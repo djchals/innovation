@@ -19,7 +19,10 @@
 							<td class="center">{{actS.weight}}kg</td>
 							<td class="center">{{actS.manufacturer}}</td>
 							<td class="center">{{actS.yearConstruction}}</td>
-							<td class="center"><router-link :to="'/starship-profile-'+actS.id">View Starship</router-link></td>
+							<td class="center">
+							    <router-link :to="'/starship-profile-'+actS.id">View Starship</router-link>
+							    <router-link :to="'/starship-profile-edit-'+actS.id">Edit Starship</router-link>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -61,7 +64,7 @@ export default {
 			this.lastOrder=body.order;
 			this.lastSort=body.sort;
 
-			const response=await fetch('/starship-list',{
+			await fetch('/starship-list',{
 				method: 'post',
 				body: JSON.stringify(body),
 				headers:{

@@ -6,6 +6,9 @@
 				<li class="collection-item"><router-link to="/people-list">People</router-link></li>
 				<li class="collection-item"><router-link to="/starship-list-name-asc">Starships</router-link></li>
 				<li class="collection-item"><router-link to="/planet-list">Planets</router-link></li>
+				<li class="collection-item"><router-link to="/people-profile-add">Add new People</router-link></li>
+				<li class="collection-item"><router-link to="/planet-profile-add">Add new Planet</router-link></li>
+				<li class="collection-item"><router-link to="/starship-profile-add">Add new Starship</router-link></li>
 			</ul>
 		</div>
 		<Loading/>

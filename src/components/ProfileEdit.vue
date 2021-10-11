@@ -5,8 +5,9 @@
 				<div class="col s12 m6">
 					<div class="card">
 						<div class="card-content">
-						    <h4 class="center">Edit {{arrTagProfileType[this.$route.params.profileType]}} {{this.$route.params.profileId}}</h4>
-						    <form @submit.prevent="chkData" action="/profile-edit" method="post" name="formEdit">
+						    <h4 v-if="(typeof this.$route.params.profileId !== 'undefined')" class="center">Edit {{arrTagProfileType[this.$route.params.profileType]}} {{this.$route.params.profileId}}</h4>
+						    <h4 v-else>New {{arrTagProfileType[this.$route.params.profileType]}}</h4>
+						    <form @submit.prevent="chkData" :action="'/profile-'+(typeof this.$route.params.profileId !== 'undefined')?'edit':'add'" method="post" name="formEdit">
 							    <div class="row">
 								<div class="col s12 m12 l6">
 								    <div class="input-field col s12">
@@ -108,13 +109,13 @@
 									    <div class="input-field col s12">
 										    <input 
 											type="text"
-											name="height" 
-											id="height" 
+											name="weight" 
+											id="weight" 
 											required 
 											class="validate" 
-											maxlength="3"
+											maxlength="6"
 										    >
-										    <label for="height" class="active">Height</label>
+										    <label for="weight" class="active">Weight</label>
 									    </div>
 								    </div>
 								    <div class="col s12 m12 l6">
@@ -136,7 +137,7 @@
 											type="text"
 											name="yearConstruction" 
 											id="yearConstruction" 
-											required 
+											required
 											class="validate" 
 											maxlength="4"
 										    >
@@ -178,6 +179,7 @@ export default {
 		profile: {}
 	}),methods: {
 		async getProfile(){
+		    if(typeof this.$route.params.profileId !== 'undefined') {
 			this.commonFns.toggleContent('loading');
 			const body={
 				profileType: this.$route.params.profileType,
@@ -192,7 +194,6 @@ export default {
 			})
 			.then(res => res.json())
 			.then(data => {
-			    console.log("fuego al 1")
 				if(data.profile){
 					this.profile=data.profile;
 				}
@@ -210,29 +211,26 @@ export default {
 				    break;
 				    case 'starship':
 					document.formEdit.weight.value=this.profile.weight
-					document.formEdit.manufaturer.value=this.profile.manufacturer
+					document.formEdit.manufacturer.value=this.profile.manufacturer
 					document.formEdit.yearConstruction.value=this.profile.yearConstruction
 				    break;
 				}
-
-
 				this.commonFns.toggleContent('ready');
 			});
-		},
+		    }else {
+			this.commonFns.toggleContent('ready');
+		    }
+	    },
 	    chkData() {
 		let flag = true
 		let body
+		let conditionEmpty
 		switch(this.$route.params.profileType){
 		    case 'people':
-			if (
-			    document.formEdit.name.value == '' ||
+			conditionEmpty = document.formEdit.name.value == '' ||
 			    document.formEdit.age.value == '' ||
 			    document.formEdit.height.value == '' ||
 			    document.formEdit.eyeColor.value == ''
-			) {
-			    flag = false
-			    alert ('Debes rellenar todos los campos')
-			}
 			body={
 			    name: document.formEdit.name.value,
 			    age: document.formEdit.age.value,
@@ -241,46 +239,40 @@ export default {
 			}
 			break
 		    case 'planet':
-			if (
-			    document.formEdit.name.value == '' ||
-			    document.formEdit.weight.value == '' ||
-			    document.formEdit.diameter.value == '' ||
-			    document.formEdit.numSatelites.value == ''
-			) {
-			    flag = false
-			    alert ('Debes rellenar todos los campos')
-			}
+			conditionEmpty = (document.formEdit.name.value == '' || document.formEdit.weight.value == '' || document.formEdit.diameter.value == '' || document.formEdit.numSatelites.value == '')
 			body={
 			    name: document.formEdit.name.value,
 			    weight: document.formEdit.weight.value,
 			    diameter: document.formEdit.diameter.value,
 			    numSatelites: document.formEdit.numSatelites.value
 			}
-
 			break
 		    case 'starship':
-			if (
-			    document.formEdit.name.value == '' ||
+			conditionEmpty = document.formEdit.name.value == '' ||
 			    document.formEdit.weight.value == '' ||
 			    document.formEdit.manufacturer.value == '' ||
 			    document.formEdit.yearConstruction.value == ''
-			) {
-			    flag = false
-			    alert ('Debes rellenar todos los campos')
-			}
 			body={
 			    name: document.formEdit.name.value,
 			    weight: document.formEdit.weight.value,
 			    manufacturer: document.formEdit.manufacturer.value,
 			    yearConstruction: document.formEdit.yearConstruction.value
 			}
-
 			break
+		}
+		if (conditionEmpty) {
+		    flag = false
+		    alert ('Debes rellenar todos los campos')
 		}
 		if(flag) {
 		    body.profileType = this.$route.params.profileType
-		    body.profileId = this.$route.params.profileId
-		    fetch('/profile-edit', {
+		    
+		    let urlProfileEditOrAdd = '/profile-add'
+		    if(typeof this.$route.params.profileId !== "undefined") {
+			body.profileId = this.$route.params.profileId
+			urlProfileEditOrAdd = '/profile-edit'
+		    }
+		    fetch(urlProfileEditOrAdd, {
 			method: 'post',
 			body: JSON.stringify(body),
 			headers: {
@@ -290,7 +282,7 @@ export default {
 		    .then(res => res.json())
 		    .then(data => {
 			if(data.saved) {
-			    this.$route.push('/'+this.$route.params.profileType+'-list')
+			    this.$router.push({path: '/'+this.$route.params.profileType+'-list'})
 			}
 		    })
 		}

@@ -33,7 +33,7 @@ router.post('/people-list',async(req,res,next)=>{
 	let order=((req.body.order!='name' && req.body.order!='age' && req.body.order!='height' && req.body.order!='eyeColor')?'name':req.body.order);
 	let sort=(req.body.sort=='dsc')?-1:1;
 	
-	const arrReturn = await pool.query('SELECT * FROM t_people');
+	const arrReturn = await pool.query('SELECT * FROM t_peoples');
 	res.send({arrPeople: arrReturn});
 });
 
@@ -88,7 +88,7 @@ router.post('/get-profile',async(req,res,next)=>{
 		case 'people':
 		case 'starship':
 		case 'planet':
-			const profile = await pool.query('SELECT * FROM t_'+req.body.profileType+' WHERE id = ?', [req.body.profileId]);
+			const profile = await pool.query('SELECT * FROM t_'+req.body.profileType+'s WHERE id = ?', [req.body.profileId]);
 			res.send({profile: profile[0]});
 			break;
 		default:
@@ -118,10 +118,36 @@ router.post('/profile-edit', async(req,res,next)=>{
 	    break
     }
     if(strUpdateVars != '') {
-	console.log("update t_"+req.body.profileType+" set "+strUpdateVars+" where id='"+req.body.profileId+"' limit 1")
-	await pool.query("update t_"+req.body.profileType+" set "+strUpdateVars+" where id='"+req.body.profileId+"' limit 1")
+	pool.query("update t_"+req.body.profileType+"s set "+strUpdateVars+" where id='"+req.body.profileId+"' limit 1")
+	res.send({saved: true})
     }
-    console.log(req.body)
+})
+router.post('/profile-add', async(req,res,next)=>{
+    req.body = commonFnsServer.cleanBody(req.body)
+
+    let strInsertVars = ''
+    let strInsertFields = ""
+    switch(req.body.profileType) {
+	case 'people':
+	    strInsertVars="'"+req.body.name+"','"+req.body.age+"','"+req.body.height+"','"+req.body.eyeColor+"'"
+	    strInsertFields = "name,age,height,eyeColor"
+	    break
+	case 'planet':
+	    strInsertVars="'"+req.body.name+"','"+req.body.weight+"','"+req.body.diameter+"','"+req.body.numSatelites+"'"
+	    strInsertFields = "name,weight,diameter,numSatelites"
+	    break
+	case 'starship':
+	    strInsertVars="'"+req.body.name+"','"+req.body.weight+"','"+req.body.manufacturer+"','"+req.body.yearConstruction+"'"	    
+	    strInsertFields = "name,weight,manufacturer,yearConstruction"
+	    break
+    }
+    if(strInsertVars != '') {
+	pool.query("insert into t_"+req.body.profileType+"s ("+strInsertFields+") values ("+strInsertVars+")")
+	res.send({saved: true})
+    }
+})
+router.get('/:profileType(people|starship|planet)-profile-add',(req,res,next)=>{
+	res.sendFile(routeIndex);
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

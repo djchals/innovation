@@ -19,7 +19,7 @@
 							<td class="center">{{actP.weight}}kg</td>
 							<td class="center">{{actP.diameter}}km</td>
 							<td class="center">{{actP.numSatelites}}</td>
-							<td class="center"><router-link :to="'/planet-profile-'+actP._id">View Planet</router-link></td>
+							<td class="center"><router-link :to="'/planet-profile-'+actP.id">View Planet</router-link></td>
 						</tr>
 					</tbody>
 				</table>

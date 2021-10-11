@@ -11,6 +11,7 @@ import PlanetList from "../components/PlanetList.vue";
 //
 
 import Profile from "../components/Profile.vue";
+import ProfileEdit from "../components/ProfileEdit.vue";
 
 const router = new Router({
 	mode: "history",
@@ -25,7 +26,8 @@ const router = new Router({
 		{path: "/planet-list",component: PlanetList, redirect: '/planet-list-name-asc'},
 		{path: "/planet-list-:order(name|weight|diameter|numSatelites)-:sort(asc|dsc)", component: PlanetList},
 		
-		{path: "/:profileType(planet|starship|people)-profile-:profileId([0-9a-f]{24})", component: Profile},
+		{path: "/:profileType(planet|starship|people)-profile-:profileId([0-9]*)", component: Profile},
+		{path: "/:profileType(planet|starship|people)-profile-edit-:profileId([0-9]*)", component: ProfileEdit},
 	]
 });
 export default router

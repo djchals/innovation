@@ -19,7 +19,7 @@
 							<td class="center">{{actS.weight}}kg</td>
 							<td class="center">{{actS.manufacturer}}</td>
 							<td class="center">{{actS.yearConstruction}}</td>
-							<td class="center"><router-link :to="'/starship-profile-'+actS._id">View Starship</router-link></td>
+							<td class="center"><router-link :to="'/starship-profile-'+actS.id">View Starship</router-link></td>
 						</tr>
 					</tbody>
 				</table>
